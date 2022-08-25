@@ -60,12 +60,13 @@ public class KafkaProducerConfig {
                 .subscribe(result -> {
                     RecordMetadata metadata = result.recordMetadata();
                     Instant timestamp = Instant.ofEpochMilli(metadata.timestamp());
-                    System.out.printf("Message %s sent successfully, topic-partition=%s-%d offset=%d timestamp=%s\n",
+//                    System.out.printf("Message %s sent successfully, topic-partition=%s-%d offset=%d timestamp=%s\n",
+                    System.out.printf("Message %s sent successfully, topic-partition=%s-%s offset=%d\n",
                             result.correlationMetadata(),
                             metadata.topic(),
                             metadata.partition(),
-                            metadata.offset(),
-                            DateTimeFormatter.ofPattern("HH:mm:ss:SSS z dd MMM yyyy").format(timestamp));
+                            metadata.offset());
+//                            DateTimeFormatter.ofPattern("HH:mm:ss:SSS z dd MMM yyyy").format(timestamp));
                 });
     }
 }

@@ -45,7 +45,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "sample-group");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         return props;
     }
 
@@ -82,6 +82,16 @@ public class KafkaConsumerConfig {
                     System.out.println(record.value());
                     record.receiverOffset().acknowledge();
                 })
-                .subscribe();
+                .subscribe(record -> {
+                    ReceiverOffset offset = record.receiverOffset();
+                    Instant timestamp = Instant.ofEpochMilli(record.timestamp());
+//                    System.out.printf("Received message: topic-partition=%s offset=%s timestamp=%s key=%d value=%s\n",
+                    System.out.printf("Received message: topic-partition=%s offset=%s key=%s value=%s\n",
+                            offset.topicPartition(),
+                            offset.offset(),
+//                            DateTimeFormatter.ofPattern("HH:mm:ss:SSS z dd MMM yyyy").format(timestamp),
+                            record.key(),
+                            record.value());
+                });
     }
 }

@@ -31,6 +31,7 @@ public class Controller {
                 .subscribe(result -> {
                     RecordMetadata metadata = result.recordMetadata();
                     Instant timestamp = Instant.ofEpochMilli(metadata.timestamp());
+                    System.out.println("timestamp: "+timestamp);
                     System.out.printf("Message %s sent successfully, topic-partition=%s-%d offset=%d timestamp=%s\n",
                             result.correlationMetadata(),
                             metadata.topic(),
