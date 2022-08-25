@@ -6,9 +6,3 @@ Content-Type: application/json
     "timestamp" : "2022-08-25T13:47:15.411",
     "message" : "message text sent to kafka"
 }
-
-### Send text request with plain text body
-POST http://localhost:8080/send
-Content-Type: text/plain
-
-custom message
